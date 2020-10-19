@@ -60,7 +60,7 @@ Ok, let's see if you can import some data and reproduce a few of the things we'v
 Here are the links towards the pulse and imdb datasets:
 
 - <a href="[links to Pulse dataset]" target="_blank">Pulse dataset</a>
-- <a href="[links to imdb dataset]" target="_blank">Pulse dataset</a>
+- <a href="[links to imdb dataset]" target="_blank">imdb dataset</a>
 
 Click on the links and download the two files. Save them is some folder. When working on your own data, it's good that you use RStudio projects like Andy Field showed you. For this course, you don't have to do that, but try at least to be organised, with a folder name and a location relevant to the course and the organisation of your computer.
 
