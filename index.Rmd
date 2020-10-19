@@ -1,0 +1,204 @@
+---
+title: "Using Rstudio, R Markdown and importing data"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    df_print: default
+runtime: shiny_prerendered
+description: >
+  Learn about the basic syntax of R.
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+tutorial_options(exercise.timelimit = 10)
+Pulse<-readRDS("Pulse.RDS")
+imdb <- readRDS("imdb2020.RDS")
+
+```
+
+
+## Overview
+
+This workbook on using Rstudio and importing data is a bit different from the other ones.
+
+First we felt that there was already a very nice resource available to help you install and get started with R and Rstudio on your own computer. So we decided to make full use of it, rather than create something new that would not be as good.
+
+Second, this is a topic that is definitely simpler to tackle in a physical classroom than on-line, where it's not so easy to help with all the unexpected issues that you may encounter. That said, we will do our best to assist you.
+
+Ok, let's get started.
+
+
+## Andy Field's series of video
+
+The very nice resource mentioned above is Andy Field's series of videos <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started" target="_blank">Getting started in R and RStudio</a>.
+
+We found it to be well made and fun to watch. We think it might be the best resource for you to get help installing R and RStudio on your own computer, as well as to get familiar with the interface of Rstudio and the use of R markdown. So, we now invite you to watch and follow along the following videos
+
+- <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio" target="_blank">Installing R and RStudio</a>
+- <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-a-quick-tour-of-r-studio" target="_blank">A quick tour of R Studio</a>
+- <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-working-in-rstudio" target="_blank">Working in RStudio</a>
+- <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-and-loading-packages" target="_blank">Installing and loading packages</a>
+- <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-r-markdown" target="_blank">R Markdown</a>
+
+Feel free to watch the two last videos if you want, but we are about to look at how to import data a bit differently in this workbook, and we feel that knowing how to make tables in R markdown is not as essential for a beginner than the rest.
+
+
+## Importing data
+
+Hopefully, by now you should have R and RStudio installed on your computer, and you should start to be familiar with the interface of RStudio. It is a good time to think about importing data. Here is a video explaining how your data should look like to be imported into R and how you can then import it.
+
+
+[embeded video]
+
+
+Ok, let's see if you can import some data and reproduce a few of the things we've done in the previous workbooks.
+
+Here are the links towards the pulse and imdb datasets:
+
+- <a href="[links to Pulse dataset]" target="_blank">Pulse dataset</a>
+- <a href="[links to imdb dataset]" target="_blank">Pulse dataset</a>
+
+Click on the links and download the two files. Save them is some folder. When working on your own data, it's good that you use RStudio projects like Andy Field showed you. For this course, you don't have to do that, but try at least to be organised, with a folder name and a location relevant to the course and the organisation of your computer.
+
+The files are *csv* files that are ready to be imported, so you can follow the importation process shown at the end of the video:
+
+1. from Rstudio, click on the `import dataset` menu. It is located at the top right of your screen if you haven't changed the default organisation of the Rstudio windows. If you've copied Andy Field's organisation, then it may be at the bottom left of your screen.
+2. click on `From Text (base)`
+3. go find the Pulse.csv file
+4. check in the preview window that the importation seems to work well. If you see some issues like weird column names, weird rows or columns, play with the parameters on the left to make it look better. Click `import`
+5. copy the command that R just wrote in the console (only the `read.csv()` command. The `view()` command is an interactive command that should not be on your scripts).
+6. If you haven't done so yet, create a new R Markdown file, clean it like Andy Field shows in his videos (video `Working in RStudio`, 12:35 - 14:25), and paste the command in an R chunk at the top of your file (like he does in the same video, at 15:55).
+7. If you've not done so yet, save your R Markdown file. 
+
+Having the importation command in your R Markdown script file is important, so that the next time you open RStudio, you don't have to go through the importation process again. You can just run the command that is in your file.
+
+Note: you can see that the command contains the path of your data file. So if you move your data, you'll have to change the path.
+
+
+
+## Working with data
+
+Now that your Pulse data is imported, you need to make sure that the library ggplot2 is loaded.
+
+1. if you haven't done so yet, install the package `tidyverse` (see 8:48 in Andy Field's video `Installing and loading packages`). tidyverse contains both, the packages ggplot2 and dplyr, so you don't need to install anything else.
+2. write in your top R chunk of your R Markdown file `library(ggplot2)`. Run the command.
+
+
+Note: the package tidyverse is installed on your computer, so you don't need to install it again, except for when you update your version of R. Loading packages is something you need to do each time you open a new session of RStudio. That's why we place the command `library()` in our script. The next time you open your R Markdown file, you simple run the commands at the top of your file and you're ready to work on your data.
+
+
+Now, create a new R chunk below the one where you imported the data pulse, and paste in it the following command:
+
+
+```{r code1, eval=FALSE, echo=TRUE}
+ggplot(data = Pulse,  aes(x = Education)) + 
+  geom_bar()
+  
+```
+
+Run the command. If you see the following graph, then congratulations. You know how to import data, and run R commands in RStudio! If it doesn't work, double-check that your R chunk is correct, try to identify what is wrong and tell us on the forum. 
+
+```{r code2, echo=FALSE}
+ggplot(data = Pulse,  aes(x = Education)) + 
+  geom_bar()
+  
+```
+
+Now both, the command and graph should look familiar to you. That's because the command is simply copied from one of the first commands in the first ggplot workbook.
+
+**Question: create several R chunks, copy in each of them, a command from the ggplot workbooks, run the commands and check that you obtain the same result as in the workbooks**
+
+
+
+## Appendix: 'Pulse' dataset 
+
+The data we are using in this session is an extract of a survey conducted in the US in June 2018, as part of the Pulse of the Nation series of surveys. This survey was a representative sample of the American population. You can read more about the survey (and others from the same series) <a href="https://thepulseofthenation.com" target="_blank">here</a>. The data has been cleaned and edited slightly for use in this course.
+
+The dataset contains an extract of 356 responses to 10 of the survey questions, and has been imported to R as a data frame called `Pulse`.
+
+A summary of the columns in the dataset is below.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+library(tidyverse)
+library(knitr)
+
+data.frame(Column=c("Gender","Age","AgeGrp","Race","Income","Education","PoliticalParty","PoliticalView","ApproveTrump","Attractiveness"),
+           Description=c("What gender do you identify with?","What is your age?","Age range","What is your race?",
+                         "About how much money do you make per year? (USD)","What is your highest level of education?",
+                         "In politics today, do you consider yourself a Democrat, a Republican, or Independent?",
+                         "Would you say you are liberal, conservative, or moderate?",
+                         "Do you approve, disapprove, or neither approve nor disapprove of how Donald Trump is handling his job as president?",
+                        "On a scale of 1-10, how physically attractive do you consider yourself?")) %>% kable()
+
+```
+
+
+Spend some time looking through the exploring the full dataset embedded below, to familiarise yourself with the columns and the type of data stored within each column. You may need to refer back to this data at times during this tutorial. Remember that R is case sensitive, so you will always have to refer to the variables in this dataset exactly as they are written in the data. There is a column in this data called "Gender" but there is no column in this data called "gender".
+
+```{r,echo=FALSE}
+DT::datatable(Pulse)
+```
+
+(You can use the arrow keys on your keyboard to scroll right in case the data table does not fit entirely on your screen)
+
+
+## Appendix: 'imdb' dataset
+
+For this session, we are using a dataset called "imdb", which we constructed from the subsets of the Internet Movie Database made available for non-commercial purposes by the IMDb team:
+<a href="https://www.imdb.com/interfaces/" target="_blank">https://www.imdb.com/interfaces/</a>
+
+
+It contains the following informations for all the entries having more than 500 votes, that are not of type "tvEpisodes" and for which information about year of release, running time and director(s) was available at the time of extraction (28/09/2020):  
+
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+library(knitr)
+data.frame(Column=c("title","type","year","length","numVotes","averageRating","director","birthYear","animation","action", "adventure", "comedy", "documentary", "fantasy", "romance", "sci_fi", "thriller"),
+           Description=c("popular title of the entry",
+                         "type of entry: movie, short, tvMiniSeries, tvMovie, tvSeries, tvShort, tvSpecial, video or videoGame",
+                         "year of release (for series, year of release of the first episode)",
+                         "duration in minutes",
+                         "number of votes for the entry",
+                         "IMDb's weighted average rating for the entry",
+                         "director of the entry (if multiple directors, the first one was picked)",
+                         "year of birth of the director",
+                        "the entry is of genre animation (TRUE/FALSE)",
+                        "the entry is of genre action (TRUE/FALSE)",
+                        "the entry is of genre adventure (TRUE/FALSE)",
+                        "the entry is of genre comedy (TRUE/FALSE)",
+                        "the entry is of genre documentary (TRUE/FALSE)",
+                        "the entry is of genre fantasy (TRUE/FALSE)",
+                        "the entry is of genre romance (TRUE/FALSE)",
+                        "the entry is of genre science fiction (TRUE/FALSE)",
+                        "the entry is of genre thriller (TRUE/FALSE)")) %>% kable()
+
+```
+
+
+The dataset has 61,776 rows. It's too much to be displayed here. Below are 50 arbitrary rows though. Spend a bit of time familiarising yourself with the columns of this dataset. You can use the arrow keys to scroll right and left.
+
+```{r,echo=FALSE}
+DT::datatable(imdb[c(1:50)*1000,])
+
+```
+
+
+## Appendix:  Useful reference links  
+
+RStudio website:<a href="https://rstudio.com/" target="_blank">https://rstudio.com/   </a> 
+
+R-project website:<a href="https://www.r-project.org/" target="_blank">https://www.r-project.org/   </a> 
+
+Andy Field's Getting started in R and RStudio:<a href="http://milton-the-cat.rocks/learnr/r/r_getting_started" target="_blank">http://milton-the-cat.rocks/learnr/r/r_getting_started   </a> 
+
+R Markdown documentation:<a href="https://rmarkdown.rstudio.com/lesson-1.html" target="_blank">https://rmarkdown.rstudio.com/lesson-1.html   </a> 
+
+RStudio CheatSheet:<a href="https://rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf" target="_blank">https://rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf   </a>
+
+R Markdown CheatSheet:<a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" target="_blank">https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf   </a>
+
+
